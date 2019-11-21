@@ -118,18 +118,6 @@
             [self reuqestFailedWithError:error forRequset:request];
         }
     }];
-    /*
-    [self.engine sendRequest:request completionHandle:^(id  _Nullable responseObject, NSError * _Nullable error) {
-        if (responseObject != nil && error == nil) {
-            [self requestSuccessWithResponse:responseObject forRequest:request];
-        }
-        
-        if (error) {
-            [self reuqestFailedWithError:error forRequset:request];
-            
-        }
-    }];
-    */
 }
 
 
@@ -146,4 +134,5 @@
 - (void)cancelRequest:(NSString *)identifier {
     [self.engine cancelRequestIdentifier:identifier];
 }
+
 @end

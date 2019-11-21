@@ -8,8 +8,8 @@
 
 #import "QIMHTTPClient.h"
 #import "QIMHTTPResponse.h"
-#import "ASIHTTPRequest.h"
-#import "ASIFormDataRequest.h"
+//#import "ASIHTTPRequest.h"
+//#import "ASIFormDataRequest.h"
 #import "QIMJSONSerializer.h"
 #import "QIMWatchDog.h"
 #import "QIMPublicRedefineHeader.h"
@@ -77,10 +77,17 @@ static NSString *baseUrl = nil;
         }
     } successBlock:^(id  _Nullable responseObjcet, NSInteger httpCode) {
         QIMVerboseLog(@"AFNetWorkingRebuid:%@,  request : %@",responseObjcet, request);
-        QIMHTTPResponse * response = [[QIMHTTPResponse alloc]init];
+        QIMHTTPResponse *response = [[QIMHTTPResponse alloc] init];
         response.data = responseObjcet;
         response.code = httpCode;
-        response.responseString = [[NSString alloc] initWithData:responseObjcet encoding:NSUTF8StringEncoding];
+        if ([responseObjcet isKindOfClass:[NSString class]]) {
+            response.responseString = responseObjcet;
+        } else if ([responseObjcet isKindOfClass:[NSURL class]]) {
+            NSURL *filePathUrl = (NSURL *)responseObjcet;
+            response.responseString = filePathUrl.absoluteString;
+        } else {
+            response.responseString = [[NSString alloc] initWithData:responseObjcet encoding:NSUTF8StringEncoding];
+        }
         QIMVerboseLog(@"【RequestUrl : %@\n RequestHeader : %@\n Response ( %@ )\n", request.url.absoluteString, request.HTTPRequestHeaders, response);
         if (completeHandler) {
             completeHandler(response);
@@ -95,6 +102,7 @@ static NSString *baseUrl = nil;
     }];
 }
 
+/*
 + (void)postMethodRequest:(QIMHTTPRequest *)request
             progressBlock:(QIMProgressHandler)progreeBlock
                  complete:(QIMCompleteHandler)completeHandler
@@ -136,7 +144,9 @@ static NSString *baseUrl = nil;
     }
     QIMVerboseLog(@"startSynchronous获取当前线程2 :%@,  %@, %lf", dispatch_get_current_queue(), request.url, [[QIMWatchDog sharedInstance] escapedTimewithStartTime:startTime]);
 }
+*/
 
+/*
 + (void)configureASIRequest:(ASIHTTPRequest *)asiRequest
               QIMHTTPRequest:(QIMHTTPRequest *)request
               progressBlock:(QIMProgressHandler)progreeBlock
@@ -195,6 +205,7 @@ static NSString *baseUrl = nil;
 //        }
     }];
 }
+*/
 
 + (void)setCommonRequestConfig:(void (^)(QIMHttpRequestConfig *))configBlock{
     [[QIMHttpRequestManager sharedManger] setQIMHttpRequestConfig:configBlock];

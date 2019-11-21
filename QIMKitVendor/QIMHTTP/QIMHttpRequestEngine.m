@@ -65,8 +65,7 @@ static dispatch_queue_t qim_request_complete_callback_quene() {
     if (request.httpRequestType == QIMHTTPRequestTypeNormal) {
         [self normalrequestTaskWithRequest:request completionHandler:completionHandler];
     } else if (request.httpRequestType == QIMHTTPRequestTypeDownload) {
-        [self downLoadRequestTaskWithRequest:request
-                           completionHandler:completionHandler];
+        [self downLoadRequestTaskWithRequest:request completionHandler:completionHandler];
     } else if (request.httpRequestType == QIMHTTPRequestTypeUpload) {
         [self sendUploadRequestTaskWithRequest:request completionHandler:completionHandler];
     } else {
@@ -204,9 +203,10 @@ static dispatch_queue_t qim_request_complete_callback_quene() {
 
     NSURLSessionDownloadTask *task = [self.sessionManager downloadTaskWithRequest:urlRequest progress:request.progressHandler destination:^NSURL *_Nonnull(NSURL *_Nonnull targetPath, NSURLResponse *_Nonnull response) {
         return downloadFileSavePath;
-    }                                                           completionHandler:^(NSURLResponse *_Nonnull response, NSURL *_Nullable filePath, NSError *_Nullable error) {
+    } completionHandler:^(NSURLResponse *_Nonnull response, NSURL *_Nullable filePath, NSError *_Nullable error) {
+        NSHTTPURLResponse *responses = (NSHTTPURLResponse *) response;
         if (completionHandler) {
-            completionHandler(filePath, -1, error);
+            completionHandler(filePath, responses.statusCode, error);
         }
     }];
     [self setRequsetIdentifierForRequest:request taskIdentifier:task.taskIdentifier];
