@@ -32,7 +32,7 @@
             return self.afPlistRequestSerializer;
             break;
         default:
-            return self.httpRequsetSerializer;
+            return self.jsonRequestSerializer;
             break;
     }
 }
@@ -52,7 +52,7 @@
             return self.afPlistResponseSerializer;
             break;
         default:
-            return self.httpResponseSerializer;
+            return self.jsonResponseSerializer;
             break;
     }
 }
