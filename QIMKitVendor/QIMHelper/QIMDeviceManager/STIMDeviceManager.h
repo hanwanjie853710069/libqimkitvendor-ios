@@ -1,0 +1,30 @@
+//
+//  STIMDeviceManager.h
+//  STIMUIKit
+//
+//  Created by 李露 on 10/10/18.
+//  Copyright © 2018 STIM. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
+NS_ASSUME_NONNULL_BEGIN
+
+@interface STIMDeviceManager : NSObject
+
++ (instancetype)sharedInstance;
+
+- (BOOL)isIphoneXSeries NS_EXTENSION_UNAVAILABLE_IOS("STIM_EXTENSION");
+
+- (CGFloat)getHOME_INDICATOR_HEIGHT NS_EXTENSION_UNAVAILABLE_IOS("STIM_EXTENSION");
+
+- (CGFloat)getTAB_BAR_HEIGHT NS_EXTENSION_UNAVAILABLE_IOS("STIM_EXTENSION");
+
+- (CGFloat)getNAVIGATION_BAR_HEIGHT NS_EXTENSION_UNAVAILABLE_IOS("STIM_EXTENSION");
+
+- (CGFloat)getSTATUS_BAR_HEIGHT NS_EXTENSION_UNAVAILABLE_IOS("STIM_EXTENSION");
+
+@end
+
+NS_ASSUME_NONNULL_END
