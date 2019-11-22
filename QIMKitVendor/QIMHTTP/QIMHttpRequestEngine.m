@@ -55,6 +55,7 @@ static dispatch_queue_t qim_request_complete_callback_quene() {
 - (AFURLSessionManager *)sessionManager {
     if (!_sessionManager) {
         _sessionManager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+        _sessionManager.operationQueue.maxConcurrentOperationCount = 6;
         _sessionManager.completionQueue = qim_request_complete_callback_quene();
     }
     return _sessionManager;
