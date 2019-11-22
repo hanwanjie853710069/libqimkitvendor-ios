@@ -7,7 +7,7 @@
  */
 
 #import <UIKit/UIKit.h>
-#import "QIMSDWebImageManager.h"
+#import "STIMSDWebImageManager.h"
 
 @interface UIView (WebCacheOperation)
 

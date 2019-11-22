@@ -7,8 +7,8 @@
  */
 
 #import <UIKit/UIKit.h>
-#import "QIMSDWebImageCompat.h"
-#import "QIMSDWebImageManager.h"
+#import "STIMSDWebImageCompat.h"
+#import "STIMSDWebImageManager.h"
 
 /**
  * Integrates QIMSDWebImage async downloading and caching of remote images with UIImageView for highlighted state.
@@ -77,7 +77,7 @@
  *                       indicating if the image was retrieved from the local cache or from the network.
  *                       The fourth parameter is the original image url.
  */
-- (void)qimsd_setHighlightedImageWithURL:(NSURL *)url options:(QIMSDWebImageOptions)options progress:(QIMSDWebImageDownloaderProgressBlock)progressBlock completed:(QIMSDWebImageCompletionBlock)completedBlock;
+- (void)qimsd_setHighlightedImageWithURL:(NSURL *)url options:(QIMSDWebImageOptions)options progress:(STIMSDWebImageDownloaderProgressBlock)progressBlock completed:(QIMSDWebImageCompletionBlock)completedBlock;
 
 /**
  * Cancel the current download
@@ -93,7 +93,7 @@
 - (void)setHighlightedImageWithURL:(NSURL *)url options:(QIMSDWebImageOptions)options __deprecated_msg("Method deprecated. Use `qimsd_setHighlightedImageWithURL:options:`");
 - (void)setHighlightedImageWithURL:(NSURL *)url completed:(QIMSDWebImageCompletedBlock)completedBlock __deprecated_msg("Method deprecated. Use `qimsd_setHighlightedImageWithURL:completed:`");
 - (void)setHighlightedImageWithURL:(NSURL *)url options:(QIMSDWebImageOptions)options completed:(QIMSDWebImageCompletedBlock)completedBlock __deprecated_msg("Method deprecated. Use `qimsd_setHighlightedImageWithURL:options:completed:`");
-- (void)setHighlightedImageWithURL:(NSURL *)url options:(QIMSDWebImageOptions)options progress:(QIMSDWebImageDownloaderProgressBlock)progressBlock completed:(QIMSDWebImageCompletedBlock)completedBlock __deprecated_msg("Method deprecated. Use `qimsd_setHighlightedImageWithURL:options:progress:completed:`");
+- (void)setHighlightedImageWithURL:(NSURL *)url options:(QIMSDWebImageOptions)options progress:(STIMSDWebImageDownloaderProgressBlock)progressBlock completed:(QIMSDWebImageCompletedBlock)completedBlock __deprecated_msg("Method deprecated. Use `qimsd_setHighlightedImageWithURL:options:progress:completed:`");
 
 - (void)cancelCurrentHighlightedImageLoad __deprecated_msg("Use `qimsd_cancelCurrentHighlightedImageLoad`");
 

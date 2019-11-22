@@ -41,7 +41,7 @@ static char TAG_ACTIVITY_SHOW;
     [self qimsd_setImageWithURL:url placeholderImage:placeholder options:options gifFlag:YES progress:nil completed:completedBlock];
 }
 
-- (void)qimsd_setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder options:(QIMSDWebImageOptions)options gifFlag:(BOOL)flag progress:(QIMSDWebImageDownloaderProgressBlock)progressBlock completed:(QIMSDWebImageCompletionBlock)completedBlock {
+- (void)qimsd_setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder options:(QIMSDWebImageOptions)options gifFlag:(BOOL)flag progress:(STIMSDWebImageDownloaderProgressBlock)progressBlock completed:(QIMSDWebImageCompletionBlock)completedBlock {
     [self qimsd_cancelCurrentImageLoad];
     objc_setAssociatedObject(self, &imageURLKey, url, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 
@@ -59,7 +59,7 @@ static char TAG_ACTIVITY_SHOW;
         }
 
         __weak __typeof(self)wself = self;
-        id <QIMSDWebImageOperation> operation = [QIMSDWebImageManager.sharedManager downloadImageWithURL:url options:options gifFlag:flag progress:progressBlock completed:^(UIImage *image, NSError *error, QIMSDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+        id <STIMSDWebImageOperation> operation = [STIMSDWebImageManager.sharedManager downloadImageWithURL:url options:options gifFlag:flag progress:progressBlock completed:^(UIImage *image, NSError *error, STIMSDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
             [wself removeActivityIndicator];
             if (!wself) return;
             dispatch_main_sync_safe(^{
@@ -89,15 +89,15 @@ static char TAG_ACTIVITY_SHOW;
             [self removeActivityIndicator];
             if (completedBlock) {
                 NSError *error = [NSError errorWithDomain:QIMSDWebImageErrorDomain code:-1 userInfo:@{NSLocalizedDescriptionKey : @"Trying to load a nil url"}];
-                completedBlock(nil, error, QIMSDImageCacheTypeNone, url);
+                completedBlock(nil, error, STIMSDImageCacheTypeNone, url);
             }
         });
     }
 }
 
-- (void)qimsd_setImageWithPreviousCachedImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder options:(QIMSDWebImageOptions)options progress:(QIMSDWebImageDownloaderProgressBlock)progressBlock completed:(QIMSDWebImageCompletionBlock)completedBlock {
-    NSString *key = [[QIMSDWebImageManager sharedManager] cacheKeyForURL:url];
-    UIImage *lastPreviousCachedImage = [[QIMSDImageCache sharedImageCache] imageFromDiskCacheForKey:key];
+- (void)qimsd_setImageWithPreviousCachedImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder options:(QIMSDWebImageOptions)options progress:(STIMSDWebImageDownloaderProgressBlock)progressBlock completed:(QIMSDWebImageCompletionBlock)completedBlock {
+    NSString *key = [[STIMSDWebImageManager sharedManager] cacheKeyForURL:url];
+    UIImage *lastPreviousCachedImage = [[STIMSDImageCache sharedImageCache] imageFromDiskCacheForKey:key];
     
     [self qimsd_setImageWithURL:url placeholderImage:lastPreviousCachedImage ?: placeholder options:options gifFlag:YES progress:progressBlock completed:completedBlock];
 }
@@ -113,7 +113,7 @@ static char TAG_ACTIVITY_SHOW;
     NSMutableArray *operationsArray = [[NSMutableArray alloc] init];
 
     for (NSURL *logoImageURL in arrayOfURLs) {
-        id <QIMSDWebImageOperation> operation = [QIMSDWebImageManager.sharedManager downloadImageWithURL:logoImageURL options:0 gifFlag:YES progress:nil completed:^(UIImage *image, NSError *error, QIMSDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+        id <STIMSDWebImageOperation> operation = [STIMSDWebImageManager.sharedManager downloadImageWithURL:logoImageURL options:0 gifFlag:YES progress:nil completed:^(UIImage *image, NSError *error, STIMSDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
             if (!wself) return;
             dispatch_main_sync_safe(^{
                 __strong UIImageView *sself = wself;
@@ -231,7 +231,7 @@ static char TAG_ACTIVITY_SHOW;
 }
 
 - (void)qimsetImageWithURL:(NSURL *)url completed:(QIMSDWebImageCompletedBlock)completedBlock {
-    [self qimsd_setImageWithURL:url placeholderImage:nil options:0 gifFlag:YES progress:nil completed:^(UIImage *image, NSError *error, QIMSDImageCacheType cacheType, NSURL *imageURL) {
+    [self qimsd_setImageWithURL:url placeholderImage:nil options:0 gifFlag:YES progress:nil completed:^(UIImage *image, NSError *error, STIMSDImageCacheType cacheType, NSURL *imageURL) {
         if (completedBlock) {
             completedBlock(image, error, cacheType);
         }
@@ -239,7 +239,7 @@ static char TAG_ACTIVITY_SHOW;
 }
 
 - (void)qimsetImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder completed:(QIMSDWebImageCompletedBlock)completedBlock {
-    [self qimsd_setImageWithURL:url placeholderImage:placeholder options:0 gifFlag:YES progress:nil completed:^(UIImage *image, NSError *error, QIMSDImageCacheType cacheType, NSURL *imageURL) {
+    [self qimsd_setImageWithURL:url placeholderImage:placeholder options:0 gifFlag:YES progress:nil completed:^(UIImage *image, NSError *error, STIMSDImageCacheType cacheType, NSURL *imageURL) {
         if (completedBlock) {
             completedBlock(image, error, cacheType);
         }
@@ -247,22 +247,22 @@ static char TAG_ACTIVITY_SHOW;
 }
 
 - (void)qimsetImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder options:(QIMSDWebImageOptions)options completed:(QIMSDWebImageCompletedBlock)completedBlock {
-    [self qimsd_setImageWithURL:url placeholderImage:placeholder options:options gifFlag:YES progress:nil completed:^(UIImage *image, NSError *error, QIMSDImageCacheType cacheType, NSURL *imageURL) {
+    [self qimsd_setImageWithURL:url placeholderImage:placeholder options:options gifFlag:YES progress:nil completed:^(UIImage *image, NSError *error, STIMSDImageCacheType cacheType, NSURL *imageURL) {
         if (completedBlock) {
             completedBlock(image, error, cacheType);
         }
     }];
 }
 
-- (void)qimsetImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder options:(QIMSDWebImageOptions)options progress:(QIMSDWebImageDownloaderProgressBlock)progressBlock completed:(QIMSDWebImageCompletedBlock)completedBlock {
-    [self qimsd_setImageWithURL:url placeholderImage:placeholder options:options gifFlag:YES progress:progressBlock completed:^(UIImage *image, NSError *error, QIMSDImageCacheType cacheType, NSURL *imageURL) {
+- (void)qimsetImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder options:(QIMSDWebImageOptions)options progress:(STIMSDWebImageDownloaderProgressBlock)progressBlock completed:(QIMSDWebImageCompletedBlock)completedBlock {
+    [self qimsd_setImageWithURL:url placeholderImage:placeholder options:options gifFlag:YES progress:progressBlock completed:^(UIImage *image, NSError *error, STIMSDImageCacheType cacheType, NSURL *imageURL) {
         if (completedBlock) {
             completedBlock(image, error, cacheType);
         }
     }];
 }
 
-- (void)qimsd_setImageWithPreviousCachedImageWithURL:(NSURL *)url andPlaceholderImage:(UIImage *)placeholder options:(QIMSDWebImageOptions)options progress:(QIMSDWebImageDownloaderProgressBlock)progressBlock completed:(QIMSDWebImageCompletionBlock)completedBlock {
+- (void)qimsd_setImageWithPreviousCachedImageWithURL:(NSURL *)url andPlaceholderImage:(UIImage *)placeholder options:(QIMSDWebImageOptions)options progress:(STIMSDWebImageDownloaderProgressBlock)progressBlock completed:(QIMSDWebImageCompletionBlock)completedBlock {
     [self qimsd_setImageWithPreviousCachedImageWithURL:url placeholderImage:placeholder options:options progress:progressBlock completed:completedBlock];
 }
 

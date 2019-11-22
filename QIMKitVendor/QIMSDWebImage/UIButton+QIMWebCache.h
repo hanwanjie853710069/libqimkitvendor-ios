@@ -6,8 +6,8 @@
  * file that was distributed with this source code.
  */
 
-#import "QIMSDWebImageCompat.h"
-#import "QIMSDWebImageManager.h"
+#import "STIMSDWebImageCompat.h"
+#import "STIMSDWebImageManager.h"
 
 /**
  * Integrates QIMSDWebImage async downloading and caching of remote images with UIButtonView.

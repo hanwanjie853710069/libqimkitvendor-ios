@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
   $beta = ENV['beta']
  
   s.subspec 'PublicRedefineHeader' do |prHeader|
-      prHeader.source_files = "QIMKitVendor/QIMPublicRedefineHeader/QIMPublicRedefineHeader.h"    
+      prHeader.source_files = "QIMKitVendor/QIMPublicRedefineHeader/STIMPublicRedefineHeader.h"
   end
 
   s.subspec 'Helper' do |helper|
@@ -59,7 +59,7 @@ Pod::Spec.new do |s|
 
     pinyin.xcconfig = { 'GCC_PREPROCESSOR_DEFINITIONS' => 'QIMPinYinEnable=1'}
     pinyin.source_files = ['QIMKitVendor/QIMPinYin/**/*{h,m,c}']
-    pinyin.resource_bundles = {'QIMPinYin' => ['QIMKitVendor/QIMPinYin/unicode_to_hanyu_qim_pinyin.txt']}
+    pinyin.resource_bundles = {'QIMPinYin' => ['QIMKitVendor/QIMPinYin/unicode_to_hanyu_stimDB_pinyin.txt']}
     pinyin.dependency 'QIMKitVendor/PublicRedefineHeader'
   end
   
@@ -111,7 +111,7 @@ Pod::Spec.new do |s|
       http.dependency 'QIMKitVendor/ASI'
       http.dependency 'QIMKitVendor/JSON'
       http.dependency 'QIMKitVendor/DOG'
-      http.dependency 'QIMKitVendor/PublicRedefineHeader'      
+      http.dependency 'QIMKitVendor/PublicRedefineHeader'
   end
 
   s.subspec 'GCD' do |gcd|

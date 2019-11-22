@@ -59,7 +59,7 @@ static char imageURLStorageKey;
         dispatch_main_async_safe(^{
             if (completedBlock) {
                 NSError *error = [NSError errorWithDomain:QIMSDWebImageErrorDomain code:-1 userInfo:@{NSLocalizedDescriptionKey : @"Trying to load a nil url"}];
-                completedBlock(nil, error, QIMSDImageCacheTypeNone, url);
+                completedBlock(nil, error, STIMSDImageCacheTypeNone, url);
             }
         });
         
@@ -69,7 +69,7 @@ static char imageURLStorageKey;
     self.imageURLStorage[@(state)] = url;
 
     __weak __typeof(self)wself = self;
-    id <QIMSDWebImageOperation> operation = [QIMSDWebImageManager.sharedManager downloadImageWithURL:url options:options gifFlag:NO progress:nil completed:^(UIImage *image, NSError *error, QIMSDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+    id <STIMSDWebImageOperation> operation = [STIMSDWebImageManager.sharedManager downloadImageWithURL:url options:options gifFlag:NO progress:nil completed:^(UIImage *image, NSError *error, STIMSDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
         if (!wself) return;
         dispatch_main_sync_safe(^{
             __strong UIButton *sself = wself;
@@ -117,7 +117,7 @@ static char imageURLStorageKey;
 
     if (url) {
         __weak __typeof(self)wself = self;
-        id <QIMSDWebImageOperation> operation = [QIMSDWebImageManager.sharedManager downloadImageWithURL:url options:options gifFlag:NO progress:nil completed:^(UIImage *image, NSError *error, QIMSDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+        id <STIMSDWebImageOperation> operation = [STIMSDWebImageManager.sharedManager downloadImageWithURL:url options:options gifFlag:NO progress:nil completed:^(UIImage *image, NSError *error, STIMSDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
             if (!wself) return;
             dispatch_main_sync_safe(^{
                 __strong UIButton *sself = wself;
@@ -140,13 +140,13 @@ static char imageURLStorageKey;
         dispatch_main_async_safe(^{
             NSError *error = [NSError errorWithDomain:QIMSDWebImageErrorDomain code:-1 userInfo:@{NSLocalizedDescriptionKey : @"Trying to load a nil url"}];
             if (completedBlock) {
-                completedBlock(nil, error, QIMSDImageCacheTypeNone, url);
+                completedBlock(nil, error, STIMSDImageCacheTypeNone, url);
             }
         });
     }
 }
 
-- (void)qimsd_setImageLoadOperation:(id<QIMSDWebImageOperation>)operation forState:(UIControlState)state {
+- (void)qimsd_setImageLoadOperation:(id<STIMSDWebImageOperation>)operation forState:(UIControlState)state {
     [self qimsd_setImageLoadOperation:operation forKey:[NSString stringWithFormat:@"UIButtonImageOperation%@", @(state)]];
 }
 
@@ -154,7 +154,7 @@ static char imageURLStorageKey;
     [self qimsd_cancelImageLoadOperationWithKey:[NSString stringWithFormat:@"UIButtonImageOperation%@", @(state)]];
 }
 
-- (void)qimsd_setBackgroundImageLoadOperation:(id<QIMSDWebImageOperation>)operation forState:(UIControlState)state {
+- (void)qimsd_setBackgroundImageLoadOperation:(id<STIMSDWebImageOperation>)operation forState:(UIControlState)state {
     [self qimsd_setImageLoadOperation:operation forKey:[NSString stringWithFormat:@"UIButtonBackgroundImageOperation%@", @(state)]];
 }
 
@@ -199,7 +199,7 @@ static char imageURLStorageKey;
 }
 
 - (void)setImageWithURL:(NSURL *)url forState:(UIControlState)state completed:(QIMSDWebImageCompletedBlock)completedBlock {
-    [self qimsd_setImageWithURL:url forState:state placeholderImage:nil options:0 completed:^(UIImage *image, NSError *error, QIMSDImageCacheType cacheType, NSURL *imageURL) {
+    [self qimsd_setImageWithURL:url forState:state placeholderImage:nil options:0 completed:^(UIImage *image, NSError *error, STIMSDImageCacheType cacheType, NSURL *imageURL) {
         if (completedBlock) {
             completedBlock(image, error, cacheType);
         }
@@ -207,7 +207,7 @@ static char imageURLStorageKey;
 }
 
 - (void)setImageWithURL:(NSURL *)url forState:(UIControlState)state placeholderImage:(UIImage *)placeholder completed:(QIMSDWebImageCompletedBlock)completedBlock {
-    [self qimsd_setImageWithURL:url forState:state placeholderImage:placeholder options:0 completed:^(UIImage *image, NSError *error, QIMSDImageCacheType cacheType, NSURL *imageURL) {
+    [self qimsd_setImageWithURL:url forState:state placeholderImage:placeholder options:0 completed:^(UIImage *image, NSError *error, STIMSDImageCacheType cacheType, NSURL *imageURL) {
         if (completedBlock) {
             completedBlock(image, error, cacheType);
         }
@@ -215,7 +215,7 @@ static char imageURLStorageKey;
 }
 
 - (void)setImageWithURL:(NSURL *)url forState:(UIControlState)state placeholderImage:(UIImage *)placeholder options:(QIMSDWebImageOptions)options completed:(QIMSDWebImageCompletedBlock)completedBlock {
-    [self qimsd_setImageWithURL:url forState:state placeholderImage:placeholder options:options completed:^(UIImage *image, NSError *error, QIMSDImageCacheType cacheType, NSURL *imageURL) {
+    [self qimsd_setImageWithURL:url forState:state placeholderImage:placeholder options:options completed:^(UIImage *image, NSError *error, STIMSDImageCacheType cacheType, NSURL *imageURL) {
         if (completedBlock) {
             completedBlock(image, error, cacheType);
         }
@@ -235,7 +235,7 @@ static char imageURLStorageKey;
 }
 
 - (void)setBackgroundImageWithURL:(NSURL *)url forState:(UIControlState)state completed:(QIMSDWebImageCompletedBlock)completedBlock {
-    [self qimsd_setBackgroundImageWithURL:url forState:state placeholderImage:nil options:0 completed:^(UIImage *image, NSError *error, QIMSDImageCacheType cacheType, NSURL *imageURL) {
+    [self qimsd_setBackgroundImageWithURL:url forState:state placeholderImage:nil options:0 completed:^(UIImage *image, NSError *error, STIMSDImageCacheType cacheType, NSURL *imageURL) {
         if (completedBlock) {
             completedBlock(image, error, cacheType);
         }
@@ -243,7 +243,7 @@ static char imageURLStorageKey;
 }
 
 - (void)setBackgroundImageWithURL:(NSURL *)url forState:(UIControlState)state placeholderImage:(UIImage *)placeholder completed:(QIMSDWebImageCompletedBlock)completedBlock {
-    [self qimsd_setBackgroundImageWithURL:url forState:state placeholderImage:placeholder options:0 completed:^(UIImage *image, NSError *error, QIMSDImageCacheType cacheType, NSURL *imageURL) {
+    [self qimsd_setBackgroundImageWithURL:url forState:state placeholderImage:placeholder options:0 completed:^(UIImage *image, NSError *error, STIMSDImageCacheType cacheType, NSURL *imageURL) {
         if (completedBlock) {
             completedBlock(image, error, cacheType);
         }
@@ -251,7 +251,7 @@ static char imageURLStorageKey;
 }
 
 - (void)setBackgroundImageWithURL:(NSURL *)url forState:(UIControlState)state placeholderImage:(UIImage *)placeholder options:(QIMSDWebImageOptions)options completed:(QIMSDWebImageCompletedBlock)completedBlock {
-    [self qimsd_setBackgroundImageWithURL:url forState:state placeholderImage:placeholder options:options completed:^(UIImage *image, NSError *error, QIMSDImageCacheType cacheType, NSURL *imageURL) {
+    [self qimsd_setBackgroundImageWithURL:url forState:state placeholderImage:placeholder options:options completed:^(UIImage *image, NSError *error, STIMSDImageCacheType cacheType, NSURL *imageURL) {
         if (completedBlock) {
             completedBlock(image, error, cacheType);
         }

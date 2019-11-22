@@ -5,7 +5,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSData (QIMImageContentType)
+@interface NSData (STIMImageContentType)
 
 /**
  *  Compute the content type for an image data
@@ -19,7 +19,7 @@
 @end
 
 
-@interface NSData (QIMImageContentTypeDeprecated)
+@interface NSData (STIMImageContentTypeDeprecated)
 
 + (NSString *)qim_contentTypeForImageData:(NSData *)data __deprecated_msg("Use `qimsd_contentTypeForImageData:`");
 

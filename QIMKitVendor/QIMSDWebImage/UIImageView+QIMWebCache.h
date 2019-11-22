@@ -6,8 +6,8 @@
  * file that was distributed with this source code.
  */
 
-#import "QIMSDWebImageCompat.h"
-#import "QIMSDWebImageManager.h"
+#import "STIMSDWebImageCompat.h"
+#import "STIMSDWebImageManager.h"
 
 /**
  * Integrates QIMSDWebImage async downloading and caching of remote images with UIImageView.
@@ -143,8 +143,8 @@
  *                       indicating if the image was retrieved from the local cache or from the network.
  *                       The fourth parameter is the original image url.
  */
-- (void)qimsd_setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder options:(QIMSDWebImageOptions)options gifFlag:(BOOL)flag progress:(QIMSDWebImageDownloaderProgressBlock)progressBlock completed:(QIMSDWebImageCompletionBlock)completedBlock;
-//- (void)qimsd_setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder options:(QIMSDWebImageOptions)options progress:(QIMSDWebImageDownloaderProgressBlock)progressBlock completed:(QIMSDWebImageCompletionBlock)completedBlock;
+- (void)qimsd_setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder options:(QIMSDWebImageOptions)options gifFlag:(BOOL)flag progress:(STIMSDWebImageDownloaderProgressBlock)progressBlock completed:(QIMSDWebImageCompletionBlock)completedBlock;
+//- (void)qimsd_setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder options:(QIMSDWebImageOptions)options progress:(STIMSDWebImageDownloaderProgressBlock)progressBlock completed:(QIMSDWebImageCompletionBlock)completedBlock;
 
 /**
  * Set the imageView `image` with an `url` and optionally a placeholder image.
@@ -161,7 +161,7 @@
  *                       indicating if the image was retrieved from the local cache or from the network.
  *                       The fourth parameter is the original image url.
  */
-- (void)qimsd_setImageWithPreviousCachedImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder options:(QIMSDWebImageOptions)options progress:(QIMSDWebImageDownloaderProgressBlock)progressBlock completed:(QIMSDWebImageCompletionBlock)completedBlock;
+- (void)qimsd_setImageWithPreviousCachedImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder options:(QIMSDWebImageOptions)options progress:(STIMSDWebImageDownloaderProgressBlock)progressBlock completed:(QIMSDWebImageCompletionBlock)completedBlock;
 
 /**
  * Download an array of images and starts them in an animation loop
@@ -203,9 +203,9 @@
 - (void)qim_setImageWithURL:(NSURL *)url completed:(QIMSDWebImageCompletedBlock)completedBlock __deprecated_msg("Method deprecated. Use `qimsd_setImageWithURL:completed:`");
 - (void)qim_setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder completed:(QIMSDWebImageCompletedBlock)completedBlock __deprecated_msg("Method deprecated. Use `qimsd_setImageWithURL:placeholderImage:completed:`");
 - (void)qim_setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder options:(QIMSDWebImageOptions)options completed:(QIMSDWebImageCompletedBlock)completedBlock __deprecated_msg("Method deprecated. Use `qimsd_setImageWithURL:placeholderImage:options:completed:`");
-- (void)qim_setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder options:(QIMSDWebImageOptions)options progress:(QIMSDWebImageDownloaderProgressBlock)progressBlock completed:(QIMSDWebImageCompletedBlock)completedBlock __deprecated_msg("Method deprecated. Use `qimsd_setImageWithURL:placeholderImage:options:progress:completed:`");
+- (void)qim_setImageWithURL:(NSURL *)url placeholderImage:(UIImage *)placeholder options:(QIMSDWebImageOptions)options progress:(STIMSDWebImageDownloaderProgressBlock)progressBlock completed:(QIMSDWebImageCompletedBlock)completedBlock __deprecated_msg("Method deprecated. Use `qimsd_setImageWithURL:placeholderImage:options:progress:completed:`");
 
-- (void)qim_qimsd_setImageWithPreviousCachedImageWithURL:(NSURL *)url andPlaceholderImage:(UIImage *)placeholder options:(QIMSDWebImageOptions)options progress:(QIMSDWebImageDownloaderProgressBlock)progressBlock completed:(QIMSDWebImageCompletionBlock)completedBlock __deprecated_msg("Method deprecated. Use `qimsd_setImageWithPreviousCachedImageWithURL:placeholderImage:options:progress:completed:`");
+- (void)qim_qimsd_setImageWithPreviousCachedImageWithURL:(NSURL *)url andPlaceholderImage:(UIImage *)placeholder options:(QIMSDWebImageOptions)options progress:(STIMSDWebImageDownloaderProgressBlock)progressBlock completed:(QIMSDWebImageCompletionBlock)completedBlock __deprecated_msg("Method deprecated. Use `qimsd_setImageWithPreviousCachedImageWithURL:placeholderImage:options:progress:completed:`");
 
 - (void)qim_setAnimationImagesWithURLs:(NSArray *)arrayOfURLs __deprecated_msg("Use `qimsd_setAnimationImagesWithURLs:`");
 

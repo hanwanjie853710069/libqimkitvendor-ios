@@ -8,7 +8,7 @@
 
 #import "UIImage+QIMMultiFormat.h"
 #import "UIImage+QIMGIF.h"
-#import "NSData+QIMImageContentType.h"
+#import "NSData+STIMImageContentType.h"
 #import <ImageIO/ImageIO.h>
 
 #ifdef QIMSD_WEBP

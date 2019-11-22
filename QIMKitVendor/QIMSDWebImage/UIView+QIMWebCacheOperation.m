@@ -35,13 +35,13 @@ static char loadOperationKey;
     id operations = [operationDictionary objectForKey:key];
     if (operations) {
         if ([operations isKindOfClass:[NSArray class]]) {
-            for (id <QIMSDWebImageOperation> operation in operations) {
+            for (id <STIMSDWebImageOperation> operation in operations) {
                 if (operation) {
                     [operation cancel];
                 }
             }
-        } else if ([operations conformsToProtocol:@protocol(QIMSDWebImageOperation)]){
-            [(id<QIMSDWebImageOperation>) operations cancel];
+        } else if ([operations conformsToProtocol:@protocol(STIMSDWebImageOperation)]){
+            [(id<STIMSDWebImageOperation>) operations cancel];
         }
         [operationDictionary removeObjectForKey:key];
     }
