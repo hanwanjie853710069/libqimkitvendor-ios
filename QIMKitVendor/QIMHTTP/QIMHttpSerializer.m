@@ -60,6 +60,7 @@
 - (AFHTTPRequestSerializer *)httpRequsetSerializer {
     if (!_httpRequsetSerializer) {
         _httpRequsetSerializer = [AFHTTPRequestSerializer serializer];
+        _httpRequsetSerializer.HTTPShouldHandleCookies = YES;
     }
     return _httpRequsetSerializer;
 }
@@ -67,6 +68,7 @@
 - (AFJSONRequestSerializer *)jsonRequestSerializer {
     if (!_jsonRequestSerializer) {
         _jsonRequestSerializer = [AFJSONRequestSerializer serializer];
+        _jsonRequestSerializer.HTTPShouldHandleCookies = YES;
     }
     return _jsonRequestSerializer;
 }
@@ -74,6 +76,7 @@
 - (AFPropertyListRequestSerializer *)afPlistRequestSerializer {
     if (!_afPlistRequestSerializer) {
         _afPlistRequestSerializer = [AFPropertyListRequestSerializer serializer];
+        _afPlistRequestSerializer.HTTPShouldHandleCookies = YES;
     }
     return _afPlistRequestSerializer;
 }
