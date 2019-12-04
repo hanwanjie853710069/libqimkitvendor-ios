@@ -34,6 +34,13 @@ static NSString *baseUrl = nil;
 }
 
 + (void)sendRequest:(QIMHTTPRequest *)request progressBlock:(QIMProgressHandler)progreeBlock complete:(QIMCompleteHandler)completeHandler failure:(QIMFailureHandler)failureHandler {
+    if (request.url.absoluteString.length <= 0 || request.url.absoluteString == nil) {
+        if (failureHandler) {
+            failureHandler([NSError errorWithDomain:@"Empty Url String" code:0 userInfo:nil]);
+        }
+        return;
+    }
+    
     if (request.uploadComponents.count > 0 || request.postParams || request.HTTPBody) {
         request.HTTPMethod = QIMHTTPMethodPOST;
     }
