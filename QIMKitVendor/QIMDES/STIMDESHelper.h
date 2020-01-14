@@ -1,8 +1,8 @@
 //
 //  STIMDESHelper.h
-//  qunarChatIphone
+//  STChatIphone
 //
-//  Created by 李露 on 2018/3/20.
+//  Created by 李海彬 on 2018/3/20.
 //
 
 #import <Foundation/Foundation.h>

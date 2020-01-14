@@ -2,7 +2,7 @@
 //  STIMJSONSerializer.m
 //  ObjcJSON
 //
-//  Created by 李露 on 2017/10/30.
+//  Created by 李海彬 on 2017/10/30.
 //  Copyright © 2017年 李露. All rights reserved.
 //
 

@@ -2,7 +2,7 @@
 //  STIMHTTPResponse.h
 //  STIMKitVendor
 //
-//  Created by 李露 on 2018/8/2.
+//  Created by 李海彬 on 2018/8/2.
 //  Copyright © 2018年 STIM. All rights reserved.
 //
 
